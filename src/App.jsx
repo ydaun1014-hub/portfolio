@@ -363,7 +363,7 @@ function App() {
       <section className="hero" id="hero-section">
         <div className="hero-layout">
           <div className="hero-media" aria-hidden="false">
-            <img src="/profile-photo.jpg" alt="나수련 프로필 사진" className="profile-photo" />
+          <img src="/portfolio/profile-photo.jpg" alt="나수련 프로필 사진" className="profile-photo" />
           </div>
           <div className="hero-content">
             <h1>디자인과 영상으로 프리미엄 브랜드의 경험을 설계하는 나수련입니다.</h1>
