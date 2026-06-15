@@ -84,16 +84,21 @@ const planCards = [
 
 const projectCards = [
   {
+    id: 'project-hospitality',
     title: '[Hospitality] 아난티 호텔',
     description: '고객의 여가와 머무름을 하나의 경험으로 재해석한 프리미엄 공간 기획 및 UI/UX 리뉴얼입니다.',
     role: '기획 100%, 디자인 100%, 영상 디렉션',
+    linkLabel: '링크 보기',
+    linkHref: 'https://portfolio.na-suryeon.com',
   },
   {
+    id: 'project-beauty',
     title: '[Beauty] 하이엔드 코스메틱',
     description: '피부에 닿는 질감과 럭셔리 감성을 극대화한 이커머스 플랫폼 설계 및 비주얼 브랜딩입니다.',
     role: 'UI 구성, 인터랙션 기획, 비주얼 가이드',
   },
   {
+    id: 'project-lifestyle',
     title: '[Lifestyle] 아티잔 베이킹',
     description: '천연 발효와 정성의 시간을 시각적 서사로 정돈한 프리미엄 베이킹 아카데미 플랫폼 디자인입니다.',
     role: '브랜드 아이덴티티, 텍스트 스토리텔링, UI/UX 디자인',
@@ -461,10 +466,32 @@ function App() {
         <h2>포트폴리오 프로젝트</h2>
         <div className="project-cards">
           {projectCards.map((card) => (
-            <article className="project-card" key={card.title}>
+            <article className="project-card" key={card.id}>
               <h3>{card.title}</h3>
               <p>{card.description}</p>
               <span>역할: {card.role}</span>
+              <div className="project-card-actions">
+                {card.linkHref ? (
+                  <a className="project-link" href={card.linkHref} target="_blank" rel="noreferrer">
+                    {card.linkLabel}
+                  </a>
+                ) : null}
+                <button type="button" onClick={() => openUploadPicker(card.id)}>
+                  업로드
+                </button>
+              </div>
+              <input
+                ref={(node) => {
+                  uploadRefs.current[card.id] = node;
+                }}
+                className="hidden-file-input"
+                type="file"
+                accept=".pdf,.txt,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png,.webp,.mp4,.mov"
+                onChange={(event) => handleFileChange(card.id, event)}
+              />
+              <p className="upload-status">
+                {uploadedFiles[card.id] ? `업로드됨: ${uploadedFiles[card.id]}` : '업로드 파일 없음'}
+              </p>
             </article>
           ))}
         </div>
@@ -587,4 +614,3 @@ function App() {
 }
 
 export default App;
-
